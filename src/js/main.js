@@ -1,44 +1,24 @@
-document.addEventListener("DOMContentLoaded", () => {
-    getSetFocus();
-    themeSwitch();
-  });
-  
-  function getSetFocus() {
-    const input = document.getElementById("focus");
-  
-    const currentFocus = localStorage.getItem('focus') ? localStorage.getItem('focus') : null;
-    if (currentFocus) {
-        input.value = currentFocus
-    }
-  
-    input.addEventListener("focusout", (event) => {
-        localStorage.setItem('focus', input.value);
-    });
-  }
-  
-  function themeSwitch() {
-    const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
-  
-    const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
-  
-    if (currentTheme) {
-        document.documentElement.setAttribute('data-theme', currentTheme);
-  
-        if (currentTheme === 'dark') {
-            toggleSwitch.checked = true;
-        }
-    }
-  
-    toggleSwitch.addEventListener('change', switchTheme, false);
-  }
-  
-  function switchTheme(e) {
-    if (e.target.checked) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark'); //add this
-    } else {
-        document.documentElement.setAttribute('data-theme', 'light');
-        localStorage.setItem('theme', 'light'); //add this
-    }
-  }
-  
+import '/css/style.css'
+import javascriptLogo from '/public/javascript.svg'
+import viteLogo from '/public/vite.svg'
+import { setupCounter } from '/js/counter.js'
+
+document.querySelector('#app').innerHTML = `
+  <div>
+    <a href="https://vitejs.dev" target="_blank">
+      <img src="${viteLogo}" class="logo" alt="Vite logo" />
+    </a>
+    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
+      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
+    </a>
+    <h1>Hello Vite! tigo</h1>
+    <div class="card">
+      <button id="counter" type="button"></button>
+    </div>
+    <p class="read-the-docs">
+      Click on the Vite logo to learn more
+    </p>
+  </div>
+`
+
+setupCounter(document.querySelector('#counter'))
